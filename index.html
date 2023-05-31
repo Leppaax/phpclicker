@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP clicker</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="clicker.js"></script>
+    <link rel="shortcut icon" href="PHP-logo.png" type="image/x-icon">
+    <script>
+    document.onkeydown = function(e) {
+        console.log('key down');
+        console.log(e);
+    };
+    </script>
+</head>
+<body onload="setInterval(kela, 5000), loadall(), setInterval(tehtävienTeko, 1000)">
+    <div class="top">
+        <nav>
+            <button id="myButton">PHP kauppa</button>
+            <br>
+            <div class="dropdown">
+                <button class="dropbtn">menu</button>
+                <div class="dropdown-content">
+                <a href="#" onclick="openPopup()">Apua</a>
+                <a href="../php_clicker/tiimi.html">Tiimi</a>
+                <a href="https://paypal.me/Leppaax?country.x=FI&locale.x=en_US">Lahjoita</a>
+                </div>
+            </div>
+
+            <div id="popup" class="popup">
+                <div class="popup-text">
+                    <h3>Kela</h3>
+                    <p>Kela maksaa sinulle vammaistukea 50€.
+                        Tämä toteutuu vain silloin kun opiskelijalla on alle 5 opintopistettä.</p>
+                </div>
+
+                <div class="popup-text">
+                    <h3>Tehtivien saanti</h3>
+                    <p>klikkaa php logoa niin saat tehtäviä tehtäväksesi.
+                        Joka klikkaus saat 1 tehtävän tehtäväksi. 
+                        Tehtävien saanti per klikkaus voi päivittää php kaupassa.
+                        tehtävien määrä näkyy oikealla listassa kohdassa "tehtävien määrä"</p>
+                </div>
+
+                <div class="popup-text">
+                    <h3>Tehtävien teko</h3>
+                    <p>Joka sekuntti suoritat tehtävän. 
+                        Jokaisesta tehtävän suorituksesta saat opinto pisteitä ja rahaa.
+                        Näitäkin määriä voi päivittää php kaupassa</p>
+                </div>
+
+                <div class="popup-text">
+                    <h3>Koulusta erotus</h3>
+                    <p>VARO! Jos opintopisteesi menevät negatiivisiksi, SINUT EROTETAAN. Ole varoivanen sillä joudut aloittamaan pelin alusta tai siitä kohdasta mihin olet tallentanut, jos sinut erotetaan</p>
+                </div>
+
+                <div class="popup-text">
+                    <h3>Opiskelupaikan vaihto</h3>
+                    <p>kun sinulla on kaikkia päivityksiä ostettuna vähintää numero x, voit päivittää seuraavaan paikkaan.</p>
+                    <br>
+                    <p>Paikat menevät näin:</p>
+                    <br>
+                    <p>AMIS -> Lukio -> AMK -> Yliopisto -> ???</p>
+                </div>
+                <div class="popup-button">
+                    <button onclick="closePopup()">Sulje</button>
+                </div>
+            </div>
+
+            <script>
+                function openPopup() {
+                    var popup = document.getElementById("popup");
+                    popup.style.display = "block";
+                }
+
+                function closePopup() {
+                    var popup = document.getElementById("popup");
+                    popup.style.display = "none";
+                }
+            </script>
+        </nav>
+        <ul class="stats2">
+            <li>raha (€):</li>
+            <li id="raha"></li>
+            <br>
+            <br>
+            <li>opintopisteet:</li>
+            <li id="opintopisteet"></li>
+            <br>
+            <br>
+            <li>tehtävien määrä:</li>
+            <li id="tehtavat"></li>
+            <br>
+            <br>
+            <li>Kyseinen opiskelupaikka: AMIS</li>
+            <br>
+        </ul>
+    </div>
+
+    <div id="myDiv">
+        <h3>Onko sulla kaikki tehtynä?! OTA LISÄÄ!!!</h3>
+
+        <div class="kauppa" onclick="tehtävät1(), loadall()">
+            <p>harjoitustyö 1</p>
+            <ul>
+                <li>antaa +1 tehtävää joka klikkaus</li>
+                <li>maksaa 30 opintopistettä</li>
+                <li>OSTETTU:</li>
+                <li id="harjtyöostettu"></li>
+            </ul>
+        </div>
+
+        <div class="kauppa" onclick="tehtävät10(), loadall()">
+            <p>mvc-demo</p>
+            <ul>
+                <li>antaa +10 tehtävää joka klikkaus</li>
+                <li>maksaa 200 opintopistettä</li>
+                <li>OSTETTU:</li>
+                <li id="mvcdemoostettu"></li>
+            </ul> 
+        </div>
+
+        <h3>Ai sulla on skill-issue ja haluat ratkaista tehtävät nopeammin</h3>
+
+        <div class="kauppa" onclick="ratkaisut1(), loadall()">
+            <p>Erityis opettajan tunti</p>
+            <ul>
+                <li>ratkoo +1 tehtävää joka sekuntti</li>
+                <li>maksaa 100 euroa</li>
+                <li>OSTETTU:</li>
+                <li id="erityisopetuntiostettu"></li>
+            </ul>
+        </div>
+
+        <div class="kauppa" onclick="ratkaisut10(), loadall()">
+            <p>Private tunti php open kanssa</p>
+            <ul>
+                <li>ratkoo +10 tehtävää joka sekuntti</li>
+                <li>maksaa 800 euroa</li>
+                <li>OSTETTU:</li>
+                <li id="privatetuntiostettu"></li>
+            </ul>
+        </div>
+
+        <h3>Eikö vanhemmat anna tarpeeks rahaa? EI HÄTÄÄ!</h3>
+
+        <div class="kauppa" onclick="äiti(), loadall()">
+            <p>Päivitä äitiä</p>
+            <ul>
+                <li>antaa +2 rahaa jokaisesta tehdystä tehtävästä</li>
+                <li>maksaa 150 euroa ja 100 opintopistettä</li>
+                <li>OSTETTU</li>
+                <li id="äitejäostettu"></li>
+            </ul>
+        </div>
+
+        <div class="kauppa" onclick="isi(), loadall()">
+            <p>Päivitä iskää</p>
+            <ul>
+                <li>antaa +10 rahaa jokaisesta tehdystä tehtävästä</li>
+                <li>maksaa 500 euroa ja 250 opintopistettä</li>
+                <li>OSTETTU</li>
+                <li id="isejäostettu"></li>
+            </ul>
+        </div>
+
+        <button onclick="loadall()" id="backButton">takaisin</button>
+    </div>
+
+
+    <h1>PHP klikkaus peli</h1>
+
+    <h2 id="erotus"></h2>
+
+    <div class="kuva">
+    <img src="PHP-logo.png" alt="php" onclick="peruna(), peruna123()">
+    </div>
+
+    <h5 id="teksti123"></h5>
+
+    <!-- <footer>&#169 copyright Leevi Pinta</footer> -->
+</body>
+
+<script></script>
+
+<script>
+    document.getElementById("myButton").addEventListener("click", function() {
+    var div = document.getElementById("myDiv");
+    div.style.display = "block"; // Show the div
+    });
+
+    document.getElementById("backButton").addEventListener("click", function() {
+    var div = document.getElementById("myDiv");
+    div.style.display = "none"; // Hide the div
+    });
+
+    function peruna123() {
+        // program to get a random item from an array
+
+        function getRandomItem(arr) {
+
+        // get random index value
+        const randomIndex = Math.floor(Math.random() * arr.length);
+
+        // get random item
+        const item = arr[randomIndex];
+
+        return item;
+        }
+
+        const array = ['Lisää tehtäviä!', 'NYT TÖIHIN!', 'kohta menee viestiä kotiin!', 'meetkö erityisopelle?', 'Kannattaisko vaihtaa alaa?', 'Yhteishaku on vielä auki!', 'tää on viimeinen varoitus!!!'];
+
+        const result = getRandomItem(array);
+        document.getElementById("teksti123").innerHTML = result
+    }
+</script>
+</html>
